@@ -1,8 +1,17 @@
-%% flexible rtn model
+%% flexible cRTN model, illustrated by a small case
 
 %% read parameters & define variables
-% on basis of lrtn model
-add_lrtn_param_and_var;
+yalmip("clear");
+% binding time interval, hour - 5 min = 5/60 hour
+delta = 60 / 60;
+NOF_INTERVAL = 24 / delta;
+NOF_HEAT = 3;
+
+% load the original parameters
+load("..\parameter_setting\param_zhang_2017.mat");
+
+% on basis of crtn model
+add_crtn_param_and_var;
 
 % index of melting tasks
 index_task_melting = 1;
@@ -13,9 +22,9 @@ G_IK(index_task_melting, 2 : 3) = G_IK(index_task_melting, 2) * [0.75, 1.25];
 
 %% add flexible rtn constraints
 cons = [];
-% basic rtn constraints
-add_basic_lrtn_cons;
-cons = [cons, cons_basic_lrtn];
+% basic rtn constraints to cons
+add_crtn_cons;
+
 
 %% hourly electricity consumption (15)
 temp = repmat(P_IK, 1, 1, NOF_INTERVAL);% form a matrix for nonimal power
@@ -41,8 +50,8 @@ result.E_T = value(E_T);
 result.R_IT = value(R_IT);
 result.D_IKT = value(D_IKT);
 
-% save("..\results\flxb_lrtn\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
-% save("..\results\time\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
+% save("..\results\flxb_crtn\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
+% save("..\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
 
 
 

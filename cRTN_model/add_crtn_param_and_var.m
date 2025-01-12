@@ -1,14 +1,7 @@
-%% parameters of the RTN model
-yalmip("clear");
-% binding time interval, hour - 5 min = 5/60 hour
-delta = 5 / 60;
-NOF_INTERVAL = 24 / delta;
-
-% load the original parameters
-load("..\parameter_setting\param_zhang_2017.mat");
+%% parameters of the cRTN model
 
 % energy price of  July 26
-% day_index = 26;
+day_index = 26;
 temp = param.price_days(:, day_index);% the price for each time interval
 % temp = temp(1:12);
 new_index = linspace(1, 24, NOF_INTERVAL);
@@ -38,7 +31,7 @@ index_resource_mat_d = 4 : 4 : NOF_RESOURCE;
 %% G(i, k): change of resource r(i) by task i(r) operating at point k
 % p.s., r and i are indexed in the same way
 
-% initilize the mu matrix
+% initialize the mu matrix
 NOF_POINT = 3; % number of operating points of the devices
 G_IK = zeros(NOF_TASK, NOF_POINT);
 

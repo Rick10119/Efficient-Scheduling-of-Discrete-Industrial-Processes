@@ -13,8 +13,6 @@ param.nominal_power = xlsread(filename, 'nominal_power');
 % processing_time
 param.processing_time = xlsread(filename, 'processing_time');
 
-% production target
-% param.production_target = 12;
 
 %% market parameters
 
