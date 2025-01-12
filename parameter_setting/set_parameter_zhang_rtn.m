@@ -13,7 +13,8 @@ param.nominal_power = xlsread(filename, 'nominal_power');
 % processing_time
 param.processing_time = xlsread(filename, 'processing_time');
 
-
+% melting_power_ratio
+param.melting_power_ratio = xlsread(filename, 'melting_power_ratio');
 %% market parameters
 
 delta_t = 1;

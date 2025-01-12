@@ -1,13 +1,7 @@
 %% parameters of the cRTN model
 
-
-
 % number of processes
 NOF_PROCESS = length(param.nominal_power);
-
-% production target
-% NOF_HEAT = 9;
-% NOF_HEAT = param.production_target;
 
 %% number/index of tasks (processing, output, waiting, input) for each heat
 NOF_TASK = NOF_PROCESS * 4;
@@ -32,7 +26,7 @@ G_IK = zeros(NOF_TASK, NOF_POINT);
 
 % processing time (reshape to NOF_TASK * 1)
 processing_time_I = reshape([param.processing_time; zeros(1, NOF_PROCESS)], NOF_TASK, 1);
-processing_time_I(find(processing_time_I< delta * 60)) = delta * 60;
+processing_time_I(find(processing_time_I < delta * 60)) = delta * 60;
 
 % processing task 
 G_IK(index_task_processing, 2) = delta ./ (processing_time_I(index_task_processing)/60);
@@ -54,11 +48,17 @@ G_IK(index_task_input, 2) = 1;
 % max value
 G_IK(find(G_IK > 1)) = 1;
 
+% index of melting tasks
+index_task_melting = 1;
+
+% modify the G matrix: melting power: 0.75-1.25
+G_IK(index_task_melting, 2 : 3) = G_IK(index_task_melting, 2) * param.melting_power_ratio;
+
 %% P(i, k): consuming power of task i(r) operating at point k
 P_IK = zeros(size(G_IK));
 P_IK(index_task_processing, 2) = param.nominal_power;
 % melting task (0.75, 1.25)
-P_IK(1, 2 : 3) = P_IK(1, 2) * [0.75, 1.25];
+P_IK(1, 2 : 3) = P_IK(1, 2) * param.melting_power_ratio;
 
 %% variables
 

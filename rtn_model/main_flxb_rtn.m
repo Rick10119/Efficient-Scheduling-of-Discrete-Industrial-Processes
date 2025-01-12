@@ -16,8 +16,8 @@ MU_RIT(index_resource_mat_s_heat(1 : NOF_HEAT), index_task_melting, :) = 0;
 MU_RIT(index_resource_mat_s_heat(1 : NOF_HEAT), index_task_melting + 1, :) = 0;
 
 % min/max melting time slots
-power_ratio_L = 0.75;
-power_ratio_H = 1.25;
+power_ratio_L = param.melting_power_ratio(1);
+power_ratio_H = param.melting_power_ratio(2);
 param.tau_L = ceil(param.processing_time(1) / delta / 60 / power_ratio_H);
 param.tau_U = ceil(param.processing_time(1) / delta / 60 / power_ratio_L);
 

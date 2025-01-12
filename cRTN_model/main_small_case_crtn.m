@@ -10,22 +10,11 @@ load(".\parameter_setting\param_small_case.mat");
 NOF_INTERVAL = length(param.price_days);
 NOF_HEAT = param.production_target;
 
-% energy price of  July 26
-day_index = 26;
-temp = param.price_days(:, day_index);% the price for each time interval
-% temp = temp(1:12);
-new_index = linspace(1, 24, NOF_INTERVAL);
-price = interp1(1 : 24, temp, new_index)';
+scenario = 2;
+price = param.price_days(:, scenario);
 
-% on basis of crtn model
+% add variables and parameters
 add_crtn_param_and_var;
-
-% index of melting tasks
-index_task_melting = 1;
-
-% modify the G matrix: melting power: 0.75-1.25
-G_IK(index_task_melting, 2 : 3) = G_IK(index_task_melting, 2) * [0.75, 1.25];
-
 
 %% add flexible rtn constraints
 cons = [];

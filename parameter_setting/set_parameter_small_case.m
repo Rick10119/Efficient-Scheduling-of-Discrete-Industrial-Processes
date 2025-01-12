@@ -16,10 +16,13 @@ param.processing_time = xlsread(filename, 'processing_time');
 % production target
 param.production_target = 2;
 
+% melting_power_ratio
+param.melting_power_ratio = xlsread(filename, 'melting_power_ratio');
+
 %% electricity price
 
 price_days = [100, 100, 100, 100, 200, 200; ...
-    100, 100, 100, 200, 200, 100];
+    100, 100, 100, 200, 200, 100]';
 
 param.price_days = price_days;
 clear price day_price

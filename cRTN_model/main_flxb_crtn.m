@@ -3,7 +3,7 @@
 %% read parameters & define variables
 yalmip("clear");
 % binding time interval, hour - 5 min = 5/60 hour
-delta = 5 / 60;
+delta = 60 / 60;
 NOF_INTERVAL = 24 / delta;
 NOF_HEAT = 3;
 
@@ -16,21 +16,14 @@ temp = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, temp, new_index)';
 
-% on basis of crtn model
+% add variables and parameters
 add_crtn_param_and_var;
 
-% index of melting tasks
-index_task_melting = 1;
-
-% modify the G matrix: melting power: 0.75-1.25
-G_IK(index_task_melting, 2 : 3) = G_IK(index_task_melting, 2) * [0.75, 1.25];
-
-
-%% add flexible rtn constraints
+%% add crtn constraints
 cons = [];
-% basic rtn constraints to cons
-add_crtn_cons;
 
+% add constraints
+add_crtn_cons;
 
 %% hourly electricity consumption (15)
 temp = repmat(P_IK, 1, 1, NOF_INTERVAL);% form a matrix for nonimal power
