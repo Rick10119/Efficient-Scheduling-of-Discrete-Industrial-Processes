@@ -1,7 +1,35 @@
 %% flexible rtn model
 
 %% read parameters & define variables
-% on basis of rtn model
+yalmip("clear");
+
+delta = 60 / 60;% 1 hour
+
+% load the original parameters
+load(".\parameter_setting\param_zhang_2017.mat");
+NOF_INTERVAL = length(param.price_days) / delta;
+
+% NOF_HEAT 如果不存在，则设置为 3
+if ~exist('NOF_HEAT', 'var')
+    NOF_HEAT = 3;
+end
+
+% day_index 如果不存在，则设置为 26
+if ~exist('day_index', 'var')
+    day_index = 26;
+end
+
+% production_target 如果不存在，则设置为 NOF_HEAT
+if isfield(param, 'production_target')
+    NOF_HEAT = param.production_target;
+end
+
+% energy price of  day_index, 插值到 NOF_INTERVAL 个时间间隔
+temp = param.price_days(:, day_index);% the price for each time interval
+new_index = linspace(1, 24, NOF_INTERVAL);
+price = interp1(1 : 24, temp, new_index)';
+
+% add variables and parameters
 add_rtn_param_and_var;
 
 % index of melting tasks

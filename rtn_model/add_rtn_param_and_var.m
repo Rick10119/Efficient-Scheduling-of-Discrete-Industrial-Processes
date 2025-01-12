@@ -1,17 +1,4 @@
 %% parameters of the RTN model
-clc;yalmip("clear");% clear;
-% binding time interval, hour - 5 min = 5/60 hour
-delta = 5 / 60;
-NOFHOUR = 24;
-NOF_INTERVAL = NOFHOUR / delta;
-
-% load the original parameters
-load(".\parameter_setting\param_zhang_2017.mat");
-
-% energy price of  day_index
-temp = param.price_days(:, day_index);% the price for each time interval
-new_index = linspace(1, 24, NOF_INTERVAL);
-price = interp1(1 : 24, temp, new_index)';
 
 % number of processes
 NOF_PROCESS = length(param.nominal_power);
