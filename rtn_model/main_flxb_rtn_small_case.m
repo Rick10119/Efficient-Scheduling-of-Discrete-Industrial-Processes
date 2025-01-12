@@ -63,6 +63,10 @@ E_T = sum((1 - R_RT(index_resource_device(2 : end), 2 : end)) .* temp) * delta +
 % minimize the total energy cost
 cost = E_T * price;
 
+% add the quadratic term of the total energy cost
+% to avoid multiple solutions
+cost = cost + sum(sum(E_T .* E_T));
+
 %% solve
 TimeLimit = 120;
 % ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 0, ...
@@ -90,8 +94,9 @@ result.R_RT = value(R_RT);
 result.S_HT = value(S_HT);
 result.P_HT = value(P_HT);
 
-% save("..\results\flxb_rtn\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
-% save("..\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
+% save
+save(".\results\flxb_rtn_small_case_scenario_" + scenario + ".mat", "result", "sol");
+
 
 
 

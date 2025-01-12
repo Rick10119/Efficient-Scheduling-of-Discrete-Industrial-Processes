@@ -10,7 +10,7 @@ load(".\parameter_setting\param_small_case.mat");
 NOF_INTERVAL = length(param.price_days);
 NOF_HEAT = param.production_target;
 
-scenario = 2;
+scenario = 1;
 price = param.price_days(:, scenario);
 
 % add variables and parameters
@@ -21,7 +21,6 @@ cons = [];
 % basic rtn constraints to cons
 add_crtn_cons;
 
-
 %% hourly electricity consumption (15)
 temp = repmat(P_IK, 1, 1, NOF_INTERVAL);% form a matrix for nonimal power
 E_T = delta * permute(sum(sum(temp .* D_IKT, 1), 2), [1, 3, 2]);% 1 * NOF_INTERVAL
@@ -29,6 +28,10 @@ E_T = delta * permute(sum(sum(temp .* D_IKT, 1), 2), [1, 3, 2]);% 1 * NOF_INTERV
 %% Objective
 % minimize the total energy cost
 cost = E_T * price;
+
+% add the quadratic term of the total energy cost
+% to avoid multiple solutions
+cost = cost + sum(sum(E_T .* E_T));
 
 %% solve
 TimeLimit = 7200;
@@ -46,8 +49,8 @@ result.E_T = value(E_T);
 result.R_IT = value(R_IT);
 result.D_IKT = value(D_IKT);
 
-% save("..\results\flxb_crtn\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
-% save("..\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
+% save
+save(".\results\crtn_small_case_scenario_" + scenario + ".mat", "result", "sol");
 
 
 
