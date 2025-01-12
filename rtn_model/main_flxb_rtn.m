@@ -6,7 +6,7 @@
 %% read parameters & define variables
 yalmip("clear");
 
-delta = 60 / 60;% 1 hour
+delta = 5 / 60;% 1 hour
 
 % load the original parameters
 load(".\parameter_setting\param_zhang_2017.mat");
@@ -87,17 +87,17 @@ TimeLimit = 7200;
 ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 1,  ...
     'gurobi.TimeLimit', TimeLimit, 'gurobi.MIPGap', gap);
 ops.gurobi.TuneTimeLimit = TimeLimit;
-sol = optimize(cons, cost, ops)
+sol = optimize(cons, cost, ops);
 
-if sol.problem ~= 0
-    % 这将打印无解的约束
-    for i = 1:length(cons)
-        if any(checkset(cons(i)) < 0)
-            % cons(i)
-            disp(i)
-        end
-    end
-end
+% if sol.problem ~= 0
+%     % 这将打印无解的约束
+%     for i = 1:length(cons)
+%         if any(checkset(cons(i)) < 0)
+%             % cons(i)
+%             disp(i)
+%         end
+%     end
+% end
 
 %% save
 result = {};
