@@ -1,4 +1,7 @@
 %% flexible rtn model
+% settings to be changed:
+% NOF_HEAT, day_index, gap
+
 
 %% read parameters & define variables
 yalmip("clear");
@@ -13,15 +16,13 @@ NOF_INTERVAL = length(param.price_days) / delta;
 if ~exist('NOF_HEAT', 'var')
     NOF_HEAT = 3;
 end
-
 % day_index 如果不存在，则设置为 26
 if ~exist('day_index', 'var')
     day_index = 26;
 end
-
-% production_target 如果不存在，则设置为 NOF_HEAT
-if isfield(param, 'production_target')
-    NOF_HEAT = param.production_target;
+% gap 如果不存在，则设置为 1e-5
+if ~exist('gap', 'var')
+    gap = 1e-1;
 end
 
 % energy price of  day_index, 插值到 NOF_INTERVAL 个时间间隔
@@ -80,12 +81,12 @@ E_T = sum((1 - R_RT(index_resource_device(2 : end), 2 : end)) .* temp) * delta +
 cost = E_T * price;
 
 %% solve
-TimeLimit = 120;
-% ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 0, ...
-%     'gurobi.TimeLimit', TimeLimit);
-ops = sdpsettings('debug',0,'solver','GUROBI', 'verbose', 0,  ...
-    'gurobi.TimeLimit', TimeLimit);
-ops.gurobi.TuneTimeLimit = 7200;
+TimeLimit = 7200;
+
+% set the solver, time limit, and optimality gap
+ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 1,  ...
+    'gurobi.TimeLimit', TimeLimit, 'gurobi.MIPGap', gap);
+ops.gurobi.TuneTimeLimit = TimeLimit;
 sol = optimize(cons, cost, ops)
 
 if sol.problem ~= 0
@@ -106,8 +107,8 @@ result.R_RT = value(R_RT);
 result.S_HT = value(S_HT);
 result.P_HT = value(P_HT);
 
-% save("..\results\flxb_rtn\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
-% save("..\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat", "result", "sol");
+% save according to the day_index, NOF_HEAT, and gap
+save(".\results\flxb_rtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat", "result", "sol");
 
 
 
