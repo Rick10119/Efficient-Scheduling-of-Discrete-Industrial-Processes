@@ -20,9 +20,9 @@ end
 if ~exist('day_index', 'var')
     day_index = 26;
 end
-% gap 如果不存在，则设置为 1e-5
+% gap 如果不存在，则设置为 1e-4
 if ~exist('gap', 'var')
-    gap = 1e-1;
+    gap = 1e-4;
 end
 
 % energy price of  day_index, 插值到 NOF_INTERVAL 个时间间隔

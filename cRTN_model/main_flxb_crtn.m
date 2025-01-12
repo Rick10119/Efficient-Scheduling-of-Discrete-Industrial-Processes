@@ -19,7 +19,7 @@ if ~exist('NOF_HEAT', 'var')
 end
 % if gap is not provided, set it to 0.01
 if ~exist('gap', 'var')
-    gap = 1e-5;
+    gap = 1e-4;
 end
 % the price for each time interval
 temp = param.price_days(:, day_index);
