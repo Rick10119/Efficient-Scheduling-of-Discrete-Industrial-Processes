@@ -11,7 +11,7 @@ price_days = [];
 for day_price = 1 : 31
 
 start_row = (day_price-1) * 24 + hour_init + 1;
-filename = 'rt_hrl_lmps.xlsx';
+filename = '.\parameter_setting\rt_hrl_lmps.xlsx';
 sheet = 'rt_hrl_lmps'; 
 xlRange = "I" + start_row + ":I" + (start_row + NOFSLOTS - 1); 
 price = xlsread(filename, sheet, xlRange);
@@ -58,6 +58,6 @@ ax.XTickLabel =  {'1','2','3','4','5','6','7','8','9','10','11','12','13','14','
 ax.FontName = 'Times New Roman';
 set(gcf, 'PaperSize', [19.4, 7.8]);
 
-saveas(gcf,'price.pdf');
+saveas(gcf,'.\parameter_setting\price.pdf');
 
 

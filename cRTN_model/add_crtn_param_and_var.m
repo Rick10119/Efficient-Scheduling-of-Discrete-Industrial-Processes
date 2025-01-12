@@ -1,11 +1,6 @@
 %% parameters of the cRTN model
 
-% energy price of  July 26
-day_index = 26;
-temp = param.price_days(:, day_index);% the price for each time interval
-% temp = temp(1:12);
-new_index = linspace(1, 24, NOF_INTERVAL);
-price = interp1(1 : 24, temp, new_index)';
+
 
 % number of processes
 NOF_PROCESS = length(param.nominal_power);

@@ -1,13 +1,11 @@
 %% 画出负荷基线曲线（第一天）
 clear;
 day_index = 15;NOF_HEAT = 8;
-cd ..\lin_rtn_model_v1.1\
-add_lrtn_param_and_var;
-cd ..\visualize\
+add_crtn_param_and_var;
 
 % RTN model
 % load("..\results\flxb_rtn_5min_6_heat_day_26.mat");
-load("..\results\time\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+load(".\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 
 % form a matrix for nonimal power (of the last three processes)
 temp = repmat(P_IK, 1, 1, NOF_INTERVAL);% form a matrix for nonimal power
@@ -20,17 +18,17 @@ p2 = P_val(2, :);
 p3 = P_val(3, :);
 p4 = P_val(4, :);
 P_val = [p1;p2;p3;p4];
-% % lRTN model
-% load("..\results\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+% % crtn model
+% load("..\results\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 % temp = length(result.E_T)/24;
-% lrtn_value_e = sum(reshape(result.E_T, temp, 24));
-% lrtn_value_c = lrtn_value_e * price;
+% crtn_value_e = sum(reshape(result.E_T, temp, 24));
+% crtn_value_c = crtn_value_e * price;
 % 
-% % lRTN model acl
-% load("..\results\flxb_lrtn_acl_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+% % crtn model acl
+% load("..\results\flxb_crtn_acl_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 % temp = length(result.E_T)/24;
-% lrtn_value_e_acl = sum(reshape(result.E_T, temp, 24));
-% lrtn_value_c_acl = lrtn_value_e_acl * price;
+% crtn_value_e_acl = sum(reshape(result.E_T, temp, 24));
+% crtn_value_c_acl = crtn_value_e_acl * price;
 
 
 
@@ -40,7 +38,7 @@ P_val = [p1;p2;p3;p4];
 area(P_val', 'LineStyle','none');hold on;
 
 % linewidth = 1;
-% plot(1:24, lrtn_value_e, "-ob", 'linewidth', linewidth);
+% plot(1:24, crtn_value_e, "-ob", 'linewidth', linewidth);
 
 % 轴属性
 ax = gca;
@@ -86,4 +84,4 @@ set(gca,'xticklabel',tm);
 ax.FontName = 'Times New Roman';
 set(gcf, 'PaperSize', [20, 10]);
 
-saveas(gcf,'typical_load_decp_lrtn.pdf');
+saveas(gcf,'.\visualize\typical_load_decp_crtn.pdf');

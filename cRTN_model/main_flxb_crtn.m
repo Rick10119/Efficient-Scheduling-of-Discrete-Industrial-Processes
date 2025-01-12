@@ -8,7 +8,13 @@ NOF_INTERVAL = 24 / delta;
 NOF_HEAT = 3;
 
 % load the original parameters
-load("..\parameter_setting\param_zhang_2017.mat");
+load(".\parameter_setting\param_zhang_2017.mat");
+% energy price of  July 26
+day_index = 26;
+temp = param.price_days(:, day_index);% the price for each time interval
+% temp = temp(1:12);
+new_index = linspace(1, 24, NOF_INTERVAL);
+price = interp1(1 : 24, temp, new_index)';
 
 % on basis of crtn model
 add_crtn_param_and_var;

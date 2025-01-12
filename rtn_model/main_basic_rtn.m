@@ -1,12 +1,12 @@
 %% basic rtn model
 
 %% read parameters & define variables
-add_param_and_var;
+add_rtn_param_and_var;
 
 %% add basic rtn constraints
 cons = [];
 add_basic_rtn_cons;
-cons = [cons, cons_basic_rtn];
+
 
 %% hourly electricity consumption (2)
 temp = repmat(param.nominal_power', 1, NOF_INTERVAL);% form a matrix for nonimal power
@@ -31,4 +31,4 @@ result.N_IT = value(N_IT);
 result.R_RT = value(R_RT);
 
 
-save("..\results\basic_rtn_" + NOF_HEAT + "_heat.mat", "result", "sol");
+save(".\results\basic_rtn_" + NOF_HEAT + "_heat.mat", "result", "sol");

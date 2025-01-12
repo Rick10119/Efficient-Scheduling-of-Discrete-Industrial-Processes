@@ -1,13 +1,10 @@
 %% 画出负荷基线曲线（第一天）
 clear;
 day_index = 15;NOF_HEAT = 8;
-cd ..\rtn_model\
-add_param_and_var;
-cd ..\visualize\
+add_rtn_param_and_var;
 
 % RTN model
-% load("..\results\flxb_rtn_5min_6_heat_day_26.mat");
-load("..\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+load(".\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 
 % form a matrix for nonimal power (of the last three processes)
 temp = repmat(param.nominal_power(2 : end)', 1, NOF_INTERVAL);
@@ -88,4 +85,4 @@ set(gca,'xticklabel',tm);
 ax.FontName = 'Times New Roman';
 set(gcf, 'PaperSize', [20, 10]);
 
-saveas(gcf,'typical_load_decp_rtn.pdf');
+saveas(gcf,'.\visualize\typical_load_decp_rtn.pdf');

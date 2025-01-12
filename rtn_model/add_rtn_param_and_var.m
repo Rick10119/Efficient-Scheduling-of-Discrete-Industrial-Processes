@@ -6,7 +6,7 @@ NOFHOUR = 24;
 NOF_INTERVAL = NOFHOUR / delta;
 
 % load the original parameters
-load("..\parameter_setting\param_zhang_2017.mat");
+load(".\parameter_setting\param_zhang_2017.mat");
 
 % energy price of  day_index
 temp = param.price_days(:, day_index);% the price for each time interval

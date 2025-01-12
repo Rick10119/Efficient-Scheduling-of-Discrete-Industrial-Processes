@@ -12,7 +12,7 @@ for NOF_HEAT = Heat_index
 
     for day_index = Day_index
 
-        load("..\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+        load(".\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 
         rtn_time_day = [rtn_time_day, sol.solvertime];
 
@@ -25,24 +25,24 @@ rtn_time = [rtn_time, 15000];
 
 
 %% cRTN model
-lrtn_time = [];
+crtn_time = [];
 
 for NOF_HEAT = [1:10]
 
-    rtn_time_day = [];
+    crtn_time_day = [];
 
     for day_index = Day_index
 
-        load("..\results\time\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+        load(".\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 
         if sol.solvertime > 7200 % over the limit
             sol.solvertime = 7200;
         end
-        rtn_time_day = [rtn_time_day, sol.solvertime];
+        crtn_time_day = [crtn_time_day, sol.solvertime];
 
     end
 
-    lrtn_time = [lrtn_time, mean(rtn_time_day)];
+    crtn_time = [crtn_time, mean(crtn_time_day)];
 
 end
 
@@ -53,14 +53,14 @@ end
 linewidth = 1;
 
 % semilogy(rtn_time, "--ob", 'linewidth', linewidth); hold on;
-% semilogy(lrtn_time, "--<r", 'linewidth', linewidth); hold on;
+% semilogy(crtn_time, "--<r", 'linewidth', linewidth); hold on;
 % semilogy(rtn_acl_time, "-->g", 'linewidth', linewidth); hold on;
-% semilogy(lrtn_acl_time, "--*m", 'linewidth', linewidth); hold on;
+% semilogy(crtn_acl_time, "--*m", 'linewidth', linewidth); hold on;
 
 plot(rtn_time, "--ob", 'linewidth', linewidth); hold on;
-plot(lrtn_time, "--<r", 'linewidth', linewidth); hold on;
+plot(crtn_time, "--<r", 'linewidth', linewidth); hold on;
 % plot(rtn_acl_time, "-->g", 'linewidth', linewidth); hold on;
-% plot(lrtn_acl_time, "--*m", 'linewidth', linewidth); hold on;
+% plot(crtn_acl_time, "--*m", 'linewidth', linewidth); hold on;
 
 
 % 轴属性
@@ -100,5 +100,5 @@ ax.XTickLabel =  {'1','2','3','4','5','6','7','8','9','10'};
 ax.FontName = 'Times New Roman';
 set(gcf, 'PaperSize', [19, 7.8]);
 
-saveas(gcf,'calculation_time.pdf');
+saveas(gcf,'.\visualize\calculation_time.pdf');
 

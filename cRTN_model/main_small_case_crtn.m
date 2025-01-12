@@ -2,13 +2,20 @@
 
 %% read parameters & define variables
 yalmip("clear");
-% binding time interval, hour - 5 min = 5/60 hour
-delta = 60 / 60;
-NOF_INTERVAL = 24 / delta;
-NOF_HEAT = 3;
+
+delta = 60 / 60;% 1 hour
 
 % load the original parameters
-load("..\parameter_setting\param_zhang_2017.mat");
+load(".\parameter_setting\param_small_case.mat");
+NOF_INTERVAL = length(param.price_days);
+NOF_HEAT = param.production_target;
+
+% energy price of  July 26
+day_index = 26;
+temp = param.price_days(:, day_index);% the price for each time interval
+% temp = temp(1:12);
+new_index = linspace(1, 24, NOF_INTERVAL);
+price = interp1(1 : 24, temp, new_index)';
 
 % on basis of crtn model
 add_crtn_param_and_var;

@@ -54,3 +54,4 @@ cons_basic_rtn = [cons_basic_rtn, sum(R_RT(index_resource_mat_d_heat, 2 : end), 
 % final products by the end of the time horizon
 cons_basic_rtn = [cons_basic_rtn, R_RT(index_resource_mat_d_heat(end - NOF_HEAT + 1 : end), end) == 1];
 
+cons = [cons, cons_basic_rtn];

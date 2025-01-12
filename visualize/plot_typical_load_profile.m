@@ -1,17 +1,15 @@
 %% 画出负荷基线曲线（第一天）
 % price
 NOF_HEAT = 8;
-cd ..\rtn_model\
-add_param_and_var;
-cd ..\visualize\
+add_rtn_param_and_var;
 
 day_index = 15;
 price = param.price_days(:, day_index);% the price for each time interval
 
 
 % RTN model
-% load("..\results\flxb_rtn_5min_6_heat_day_26.mat");
-load("..\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+% load(".\results\flxb_rtn_5min_6_heat_day_26.mat");
+load(".\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 
 
 temp = length(result.E_T)/24;
@@ -19,10 +17,10 @@ true_value_e = sum(reshape(result.E_T, temp, 24));
 true_value_c = true_value_e * price;
 
 % lRTN model
-load("..\results\time\flxb_lrtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+load(".\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
 temp = length(result.E_T)/24;
-lrtn_value_e = sum(reshape(result.E_T, temp, 24));
-lrtn_value_c = lrtn_value_e * price;
+crtn_value_e = sum(reshape(result.E_T, temp, 24));
+crtn_value_c = crtn_value_e * price;
 
 
 

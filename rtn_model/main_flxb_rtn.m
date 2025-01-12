@@ -2,7 +2,7 @@
 
 %% read parameters & define variables
 % on basis of rtn model
-add_param_and_var;
+add_rtn_param_and_var;
 
 % index of melting tasks
 index_task_melting = 1 : 2 : 2 * NOF_HEAT;
@@ -36,10 +36,10 @@ P_HT = sdpvar(NOF_HEAT, NOF_INTERVAL, 'full');
 cons = [];
 % basic rtn constraints
 add_basic_rtn_cons;
-cons = [cons, cons_basic_rtn];
+
 % flxb rtn constraints
 add_flxb_rtn_cons;
-cons = [cons, cons_flxb_rtn];
+
 
 %% hourly electricity consumption (15)
 % form a matrix for nonimal power (of the last three processes)

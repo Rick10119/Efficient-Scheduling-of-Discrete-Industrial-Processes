@@ -46,7 +46,7 @@ ax.XTickLabel =  {'1','2','3','4','5','6','7','8','9','10','11','12','13','14','
 ax.FontName = 'Times New Roman';
 set(gcf, 'PaperSize', [18, 10]);
 
-saveas(gcf,'dispatch.pdf');
+saveas(gcf,'.\visualize\dispatch.pdf');
 % close;
 
 
