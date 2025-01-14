@@ -10,7 +10,7 @@ load(".\parameter_setting\param_small_case.mat");
 NOF_INTERVAL = length(param.price_days);
 NOF_HEAT = param.production_target;
 
-scenario = 1;
+scenario = 2;
 price = param.price_days(:, scenario);
 
 % add variables and parameters
@@ -48,9 +48,12 @@ result = {};
 result.E_T = value(E_T);
 result.R_IT = value(R_IT);
 result.D_IKT = value(D_IKT);
+result.u_RT = value(u_RT);
+result.on_RT = value(on_RT);
 
 % save
 save(".\results\crtn_small_case_scenario_" + scenario + ".mat", "result", "sol");
+
 
 
 

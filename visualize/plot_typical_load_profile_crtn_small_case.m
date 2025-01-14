@@ -1,11 +1,6 @@
-%% 画出负荷基线曲线（第一天）
+%% to plot the typical load profile of the small case, cRTN
 clear;
-day_index = 15;NOF_HEAT = 8;
-add_crtn_param_and_var;
-
-% RTN model
-% load("..\results\flxb_rtn_5min_6_heat_day_26.mat");
-load(".\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+main_small_case_crtn;
 
 % form a matrix for nonimal power (of the last three processes)
 temp = repmat(P_IK, 1, 1, NOF_INTERVAL);% form a matrix for nonimal power

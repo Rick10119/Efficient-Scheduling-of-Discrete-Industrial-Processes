@@ -39,7 +39,9 @@ G_IK(index_task_output, 2) = 1;
 G_IK(index_task_waiting, 3) = delta ./ (processing_time_I(index_task_waiting - 1)/60 + delta);
 G_IK(index_task_waiting, 2) = delta ./ (processing_time_I(index_task_waiting)/60 + delta);
 % final product
-G_IK(index_task_waiting(end), 2 : 3) = 1;
+if NOF_PROCESS > 1
+    G_IK(index_task_waiting(end), 2 : 3) = 1;
+end
 
 
 % input task (in 1 time slot)
@@ -68,12 +70,14 @@ R_IT = sdpvar(NOF_RESOURCE, NOF_INTERVAL + 1, 'full');
 % operating duration of task i on point n in t (in time slots)
 D_IKT = sdpvar(NOF_TASK, NOF_POINT, NOF_INTERVAL, 'full');
 
-% binvar to model D * R = 0 for some processes
+% binvar to model D * R = 0 for processes
 u_RT = binvar(NOF_PROCESS * 2, NOF_INTERVAL);
 
 % binvar to model output/input task
 on_RT = binvar(NOF_PROCESS * 2, NOF_INTERVAL);
 % binvar to model processing task (not melting)
-on_IKT = binvar(3, NOF_INTERVAL);
+if NOF_PROCESS > 1
+    on_IKT = binvar(NOF_PROCESS - 1, NOF_INTERVAL);
+end
 
 

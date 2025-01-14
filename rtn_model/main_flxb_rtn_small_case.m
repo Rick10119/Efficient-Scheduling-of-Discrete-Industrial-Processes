@@ -10,7 +10,7 @@ load(".\parameter_setting\param_small_case.mat");
 NOF_INTERVAL = length(param.price_days);
 NOF_HEAT = param.production_target;
 
-scenario = 2;
+scenario = 1;
 price = param.price_days(:, scenario);
 
 % add variables and parameters
