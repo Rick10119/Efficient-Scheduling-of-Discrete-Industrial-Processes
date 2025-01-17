@@ -62,11 +62,7 @@ cons_crtn = [cons_crtn, ...
 % not operating if R_i-1 < 1
 temp = [index_task_output, index_task_input];
 cons_crtn = [cons_crtn, ...
-    permute(D_IKT(temp, 2, :), [1, 3, 2]) == on_RT];% feels bad
-% (b) guarantees that D_IKT(temp, 1, :) is also binvar
-% cons_crtn = [cons_crtn, ...
-%     permute(D_IKT(index_task_processing(2 : 4), 2, :), [1, 3, 2]) == on_IKT];
-
+    permute(D_IKT(temp, 2, :), [1, 3, 2]) == on_RT];
 
 %% Product Delivery (8)
 % final products by the end of the time horizon

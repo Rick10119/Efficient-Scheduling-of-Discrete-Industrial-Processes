@@ -1,13 +1,18 @@
 %% 统计各模型的误差（用能曲线/用能成本）
 NOF_HEAT = 8;
 % Day_index = [15];
-Day_index = [5:8, 11:13, 15, 19:22, 26:28];
+% Day_index = [5:8, 11:13, 15, 19:22, 26:28];
+gap = 1e-3;
+Day_index = [5:8, 11:13, 15, 19:21];
 %% RTN model
 rtn_value_e = [];
 rtn_value_c = [];
 rtn_time = [];
 
-add_rtn_param_and_var;
+% add_rtn_param_and_var;
+% load the original parameters
+load(".\parameter_setting\param_zhang_2017.mat");
+NOF_INTERVAL = 24*12;
 
 for day_index = Day_index
 
@@ -15,7 +20,7 @@ price = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, price, new_index)';
 
-load(".\results\time\flxb_rtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+load(".\results\flxb_rtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
 
 rtn_value_c = [rtn_value_c, result.E_T * price];
 
@@ -30,14 +35,14 @@ end
 %% cRTN model
 crtn_value_e = [];
 crtn_value_c = [];
-
+gap = 1e-4;
 for day_index = Day_index
 
 price = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, price, new_index)';
 
-load(".\results\time\flxb_crtn_5min_" + NOF_HEAT + "_heat_day_" + day_index + ".mat");
+load(".\results\flxb_crtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
 
 crtn_value_c = [crtn_value_c, result.E_T * price];
 

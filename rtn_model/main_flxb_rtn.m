@@ -10,7 +10,7 @@ delta = 5 / 60;% 1 hour
 
 % load the original parameters
 load(".\parameter_setting\param_zhang_2017.mat");
-NOF_INTERVAL = length(param.price_days) / delta;
+
 
 % NOF_HEAT 如果不存在，则设置为 3
 if ~exist('NOF_HEAT', 'var')
@@ -27,6 +27,7 @@ end
 
 % energy price of  day_index, 插值到 NOF_INTERVAL 个时间间隔
 temp = param.price_days(:, day_index);% the price for each time interval
+NOF_INTERVAL = length(temp) / delta;
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, temp, new_index)';
 
@@ -81,7 +82,7 @@ E_T = sum((1 - R_RT(index_resource_device(2 : end), 2 : end)) .* temp) * delta +
 cost = E_T * price;
 
 %% solve
-TimeLimit = 7200;
+TimeLimit = 15000;
 
 % set the solver, time limit, and optimality gap
 ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 1,  ...

@@ -45,7 +45,7 @@ E_T = delta * permute(sum(sum(temp .* D_IKT, 1), 2), [1, 3, 2]);% 1 * NOF_INTERV
 cost = E_T * price;
 
 %% solve
-TimeLimit = 7200;
+TimeLimit = 15000;
 % set the solver, time limit, and optimality gap
 ops = sdpsettings('debug',1,'solver','GUROBI', 'verbose', 1,  ...
     'gurobi.TimeLimit', TimeLimit, 'gurobi.MIPGap', gap);
