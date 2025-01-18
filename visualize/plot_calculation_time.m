@@ -1,13 +1,12 @@
 %% To plot the calculation time of the models
 
-% Day_index = [5:8, 11:13, 15, 19:22, 26:28];
 Day_index = [5:8, 11:13, 15, 19:22, 26:28];
 
 gap = 1e-4;% default gap
 %% RTN model
 
 rtn_time = [];
-Heat_index = [1:7];
+Heat_index = [1:8];
 for NOF_HEAT = Heat_index
 
     rtn_time_day = [];
@@ -23,7 +22,7 @@ for NOF_HEAT = Heat_index
     rtn_time = [rtn_time, mean(rtn_time_day)];
 
 end
-rtn_time = [rtn_time, 15000]/60;% 15000 is the limit of the solver
+rtn_time = rtn_time/60;
 
 
 %% cRTN model
@@ -60,15 +59,15 @@ ax.XLim = [0, 8];
 ax.YLim = [0, 120];
 
 legend('RTN','cRTN', ... % 'RTN-fast','cRTN-fast', ...
-    'fontsize',13.5, ...
+    'fontsize',15, ...
     'Location','NorthWest', ...
     'Orientation','vertical', ...
-    'FontName', 'Times New Roman');
+    'FontName', 'Arial');
 set(gca, "YGrid", "on");
 
 %设置figure各个参数
-x1 = xlabel('Number of Heats','FontSize',13.5,'FontName', 'Times New Roman','FontWeight','bold');          %轴标题可以用tex解释
-y1 = ylabel('Calculation Time (minute)','FontSize',13.5,'FontName', 'Times New Roman','FontWeight','bold');
+x1 = xlabel('Number of Heats','FontSize',15,'FontName', 'Arial');          %轴标题可以用tex解释
+y1 = ylabel('Calculation Time (minute)','FontSize',15,'FontName', 'Arial');
 
 
 % 图片大小
@@ -80,7 +79,7 @@ set(gcf, 'Units', figureUnits, 'Position', [10 10 figureWidth figureHeight]);
 
 
 % 字体与大小
-ax.FontSize = 13.5;
+ax.FontSize = 15;
 
 % 设置刻度
 ax.XTick = [1:10];
@@ -88,7 +87,7 @@ ax.YTick = [0, 30, 60, 120];
 
 % 调整标签
 ax.XTickLabel =  {'1','2','3','4','5','6','7','8','9','10'};
-ax.FontName = 'Times New Roman';
+ax.FontName = 'Arial';
 set(gcf, 'PaperSize', [19, 7.8]);
 
 saveas(gcf,'.\visualize\calculation_time.pdf');

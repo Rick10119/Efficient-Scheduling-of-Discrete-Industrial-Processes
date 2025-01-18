@@ -11,7 +11,7 @@ NOF_HEAT = 8;
 %     end
 % end
 
-for gap = [1, 1e-1, 1e-2]
+for gap = [1e-3, 1e-4]
     for day_index = [5:8, 11:13, 15]
         disp("day_index: " + day_index);
         disp("gap: " + gap);
