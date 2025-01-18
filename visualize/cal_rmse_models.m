@@ -1,9 +1,7 @@
 %% 统计各模型的误差（用能曲线/用能成本）
 NOF_HEAT = 8;
-% Day_index = [15];
-% Day_index = [5:8, 11:13, 15, 19:22, 26:28];
-gap = 1e-3;
-Day_index = [5:8, 11:13, 15, 19:21];
+Day_index = [5:8, 11:13, 15, 19:22, 26:28];
+
 %% RTN model
 rtn_value_e = [];
 rtn_value_c = [];
@@ -19,7 +17,7 @@ for day_index = Day_index
 price = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, price, new_index)';
-
+gap = 1e-1;
 load(".\results\flxb_rtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
 
 rtn_value_c = [rtn_value_c, result.E_T * price];

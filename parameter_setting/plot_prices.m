@@ -33,8 +33,8 @@ plot(1:24, price_days(:, Day_index), 'linewidth', linewidth);
 
 
 %设置figure各个参数
-x1 = xlabel('Hour','FontSize',13.5,'FontName', 'Times New Roman','FontWeight','bold');          %轴标题可以用tex解释
-y1 = ylabel('Electricity Price ($/MWh)','FontSize',13.5,'FontName', 'Times New Roman','FontWeight','bold');
+x1 = xlabel('Hour','FontSize',15,'FontName', 'Arial');          %轴标题可以用tex解释
+y1 = ylabel('Electricity Price ($/MWh)','FontSize',15,'FontName', 'Arial');
 
 
 % 图片大小
@@ -48,16 +48,16 @@ ax = gca;
 ax.XLim = [1, 24];
 
 % 字体与大小
-ax.FontSize = 13.5;
+ax.FontSize = 15;
 
 % 设置刻度
 ax.XTick = [1:24];
 
 % 调整标签
 ax.XTickLabel =  {'1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'};
-ax.FontName = 'Times New Roman';
+ax.FontName = 'Arial';
 set(gcf, 'PaperSize', [19.4, 7.8]);
 
-saveas(gcf,'.\parameter_setting\price.pdf');
+saveas(gcf,'.\visualize\price.pdf');
 
 

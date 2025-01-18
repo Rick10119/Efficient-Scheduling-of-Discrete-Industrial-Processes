@@ -6,7 +6,7 @@ Day_index = [5:8, 11:13, 15, 19:22, 26:28];
 rtn_value_e = [];
 rtn_value_c = [];
 rtn_time = [];
-gap = 1e-2;
+
 % add_rtn_param_and_var;
 % load the original parameters
 load(".\parameter_setting\param_zhang_2017.mat");
@@ -17,7 +17,7 @@ for day_index = Day_index
 price = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, price, new_index)';
-
+gap = 1e-1;
 load(".\results\flxb_rtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
 
 rtn_value_c = [rtn_value_c, result.E_T * price];
@@ -30,7 +30,7 @@ rtn_value_e = [rtn_value_e, result.E_T];
 end
 
 
-%% cRTN model
+%% RTN model
 crtn_value_e = [];
 crtn_value_c = [];
 gap = 1e-4;
@@ -40,7 +40,7 @@ price = param.price_days(:, day_index);% the price for each time interval
 new_index = linspace(1, 24, NOF_INTERVAL);
 price = interp1(1 : 24, price, new_index)';
 
-load(".\results\flxb_crtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
+load(".\results\flxb_rtn_day_" + day_index + "_heat_" + NOF_HEAT + "_gap_" + gap + ".mat");
 
 crtn_value_c = [crtn_value_c, result.E_T * price];
 
