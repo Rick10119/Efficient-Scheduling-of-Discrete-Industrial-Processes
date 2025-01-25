@@ -7,7 +7,7 @@ Day_index = [5:8, 11:13, 15, 19:22, 26:28];
 rtn_time = [];
 Heat_index = 8;
 NOF_HEAT = 8;
-for gap = [1, 1e-1, 1e-2, 1e-3, 1e4]
+for gap = [1, 1e-1, 1e-2, 1e-3, 1e-4]
 
     rtn_time_day = [];
 
