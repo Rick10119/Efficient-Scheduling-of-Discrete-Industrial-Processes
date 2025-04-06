@@ -3,6 +3,11 @@
 ## Project Overview
 This project provides research data and code for accelerating the application of RTN models in discrete industrial production processes. By using continuous modeling methods, we can improve scheduling efficiency and reduce computation time.
 
+<img width="506" alt="image" src="https://github.com/user-attachments/assets/e8300ec6-8231-4175-abb5-bc39ace05b92" />
+
+<img width="509" alt="image" src="https://github.com/user-attachments/assets/f001b792-9ec3-4257-b3cb-5232ecdcc46d" />
+
+
 ## Code Structure
 - `cRTN_model/`: Contains the main scripts and functions for the cRTN model.
   - `add_crtn_cons.m`: Defines the constraints for the cRTN model.
