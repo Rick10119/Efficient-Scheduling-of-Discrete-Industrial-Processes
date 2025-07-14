@@ -180,7 +180,7 @@ If you use this code in your research, please cite:
   title={Efficient Scheduling of Discrete Industrial Processes through Continuous Modeling},
   author={Lyu, Ruike and Su, Xiangbo and Du, Ershun and Guo, Hongye and Chen, Qixin and Kang, Chongqing},
   journal={IEEE Transactions on Smart Grid},
-  year={2024},
+  year={2025},
   note={in press}
 }
 ```
