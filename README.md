@@ -1,5 +1,7 @@
 # Efficient Scheduling of Discrete Industrial Processes through Continuous Modeling
 
+## video introduction: https://www.bilibili.com/video/BV1cdurzbEgi
+
 ## Project Overview
 This project provides research data and code for accelerating the application of RTN models in discrete industrial production processes. By using continuous modeling methods, we can improve scheduling efficiency and reduce computation time.
 
