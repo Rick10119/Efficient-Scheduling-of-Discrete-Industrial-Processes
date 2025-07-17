@@ -2,6 +2,8 @@
 
 Cite: R. Lyu, X. Su, E. Du, H. Guo, Q. Chen and C. Kang. "Efficient Scheduling of Discrete Industrial Processes through Continuous Modeling", IEEE Transactions on Smart Grid, in press.
 
+Link: https://ieeexplore.ieee.org/document/11082423
+
 Video Introduction: https://www.bilibili.com/video/BV1cdurzbEgi
 
 ## Project Overview
